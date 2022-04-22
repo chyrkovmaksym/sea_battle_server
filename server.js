@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const io = require('socket.io')(server, {
   cors: {
     origin: '*',
@@ -72,7 +73,6 @@ app.get('/', (req, res) => {
 });
 
 app.post('/register', jsonParser, function (request, response) {
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
   if (!request.body) return response.sendStatus(400);
   const hash = bcrypt.hashSync(request.body.password, 10);
   knex('users')
