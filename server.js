@@ -69,6 +69,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.send('it\'s working!');
+})
+
 app.post('/register', jsonParser, function (request, response) {
   if (!request.body) return response.sendStatus(400);
   const hash = bcrypt.hashSync(request.body.password, 10);
