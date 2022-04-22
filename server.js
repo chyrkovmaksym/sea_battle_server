@@ -68,10 +68,11 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', (req, res) => {
-  res.send('it\'s working!');
-})
+  res.send("it's working!");
+});
 
 app.post('/register', jsonParser, function (request, response) {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
   if (!request.body) return response.sendStatus(400);
   const hash = bcrypt.hashSync(request.body.password, 10);
   knex('users')
