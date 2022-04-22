@@ -47,10 +47,8 @@ io.on('connection', (socket) => {
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    host: '127.0.0.1',
-    user: 'postgres',
-    password: '12345678',
-    database: 'battleship',
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
   },
 });
 
